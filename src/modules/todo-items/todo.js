@@ -16,13 +16,12 @@ const toDo = (function() {
     e.preventDefault();
     const titleValue = document.getElementById('todo-title').value;
     const descValue = document.getElementById('todo-description').value;
-    const dueValue = document.getElementById('todo-date').value;
+    const dueValue = document.getElementById('todo-due-date').value;
     const index = toDoArray.length;
     const newToDo = toDoFactory(titleValue, descValue, dueValue, index);
     toDoArray.push(newToDo);
     document.getElementById('todo-form').reset();
     showToDos(toDoArray);
-    printArray();
   }
 
   function printArray() {
@@ -31,6 +30,6 @@ const toDo = (function() {
     });
   }
     
-  return { toDoArray }
+  return { toDoArray, toDoFactory }
     
 })();
