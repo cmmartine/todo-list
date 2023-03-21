@@ -5,9 +5,36 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="main.js" defer></script>
+  <link rel="stylesheet" href="../src/style.css">
   <title>Todo List</title>
 </head>
 <body>
-  <div id="content" class="content"></div>
+  <nav id="nav" class="nav"></nav>
+
+  <div id="content" class="content">
+
+    <form id="todo-form" class="toggle-visibility">
+      <p>*Required Field</p>
+  
+      <p>*Title:</p>
+      <input type='text' name='title' id='todo-title' required>
+    
+      <p>Description:</p>
+      <input type='text' name='description' id='todo-description'>
+
+      <p>Due Date:</p>
+      <input type='text' name='due-date' id='todo-date'>
+    
+      <input type='submit' name='submit' id='todo-submit' value = "Add a to do">
+    </form>
+
+    <button id="show-todo">New To Do</button>
+    <button id="hide-todo" class="toggle-visibility">Hide To Do Form</button>
+
+    <div id="todo-list" class="todo-list"></div>
+
+  </div>
+
+  <footer id="footer" class="footer"></footer>
 </body>
 </html>
