@@ -22,8 +22,8 @@
       <p>Description:</p>
       <input type='text' name='description' id='todo-description'>
 
-      <p>Due Date:</p>
-      <input type='text' name='due-date' id='todo-date'>
+      <p>Due-date:</p>
+      <input type='text' name='due-date' id='todo-due-date'>
     
       <input type='submit' name='submit' id='todo-submit' value = "Add a to do">
     </form>
@@ -31,7 +31,27 @@
     <button id="show-todo">New To Do</button>
     <button id="hide-todo" class="toggle-visibility">Hide To Do Form</button>
 
+    <form id="project-form" class="toggle-visibility">
+      <p>*Required Field</p>
+  
+      <p>*Title:</p>
+      <input type='text' name='title' id='project-title' required>
+    
+      <p>Description:</p>
+      <input type='text' name='description' id='project-description'>
+
+      <p>Due-date:</p>
+      <input type='text' name='due-date' id='project-due-date'>
+    
+      <input type='submit' name='submit' id='project-submit' value = "Add a Project">
+    </form>
+
+    <button id="show-project">New Project</button>
+    <button id="hide-project" class="toggle-visibility">Hide Project Form</button>
+
     <div id="todo-list" class="todo-list"></div>
+
+    <div id="project-list" class="project-list"></div>
 
   </div>
 
