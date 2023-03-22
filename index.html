@@ -9,52 +9,67 @@
   <title>Todo List</title>
 </head>
 <body>
-  <nav id="nav" class="nav"></nav>
+<div class="content-container">
+  <nav id="nav" class="nav">
+    <h3 class="nav-h3">To Do List</h3>
+  </nav>
 
   <div id="content" class="content">
+    <div class="top-forms-container">
+      <div class="form-div">
+        <form id="todo-form" class="toggle-visibility">
+          <p class='input-title'>New To Do</p>
+      
+          <p class='input-title'>Title:</p>
+          <input type='text' name='title' id='todo-title' required>
+        
+          <p class='input-title'>Description:</p>
+          <input type='text' name='description' id='todo-description'>
 
-    <form id="todo-form" class="toggle-visibility">
-      <p>*Required Field</p>
-  
-      <p>*Title:</p>
-      <input type='text' name='title' id='todo-title' required>
-    
-      <p>Description:</p>
-      <input type='text' name='description' id='todo-description'>
+          <p class='input-title'>Due-date:</p>
+          <input type='text' name='due-date' id='todo-due-date'>
+        
+          <input type='submit' class="form-button" name='submit' id='todo-submit' value = "Add To Do">
+        </form>
 
-      <p>Due-date:</p>
-      <input type='text' name='due-date' id='todo-due-date'>
-    
-      <input type='submit' name='submit' id='todo-submit' value = "Add a to do">
-    </form>
+        <button id="show-todo" class="form-button">New To Do</button>
+        <button id="hide-todo" class="form-button toggle-visibility">Hide</button>
+      </div>
 
-    <button id="show-todo">New To Do</button>
-    <button id="hide-todo" class="toggle-visibility">Hide To Do Form</button>
+      <div class="form-div">
+        <form id="project-form" class="toggle-visibility">
+          <p class='input-title'>New Project</p>
+      
+          <p class='input-title'>Title:</p>
+          <input type='text' name='title' id='project-title' required>
+        
+          <p class='input-title'>Description:</p>
+          <input type='text' name='description' id='project-description'>
 
-    <form id="project-form" class="toggle-visibility">
-      <p>*Required Field</p>
-  
-      <p>*Title:</p>
-      <input type='text' name='title' id='project-title' required>
-    
-      <p>Description:</p>
-      <input type='text' name='description' id='project-description'>
+          <p class='input-title'>Due-date:</p>
+          <input type='text' name='due-date' id='project-due-date'>
+        
+          <input type='submit' class="form-button" name='submit' id='project-submit' value = "Add Project">
+        </form>
 
-      <p>Due-date:</p>
-      <input type='text' name='due-date' id='project-due-date'>
-    
-      <input type='submit' name='submit' id='project-submit' value = "Add a Project">
-    </form>
+        <button id="show-project" class="form-button">New Project</button>
+        <button id="hide-project" class="form-button toggle-visibility">Hide</button>
+      </div>
+    </div>
 
-    <button id="show-project">New Project</button>
-    <button id="hide-project" class="toggle-visibility">Hide Project Form</button>
+    <h2>To Dos</h2>
+    <div id="todo-list" class="todo-list">
+    </div>
 
-    <div id="todo-list" class="todo-list"></div>
-
-    <div id="project-list" class="project-list"></div>
+    <h2>Projects</h2>
+    <div id="project-list" class="project-list">
+    </div>
 
   </div>
 
-  <footer id="footer" class="footer"></footer>
+  <footer id="footer" class="footer">
+    <p class="footer-p">Created By: Chris Martine</p>
+  </footer>
+</div>
 </body>
 </html>
