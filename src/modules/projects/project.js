@@ -1,5 +1,5 @@
 export { project };
-import { showProjects } from "./project-dom";
+import { showProjects, removeProjectDOM } from "./project-dom";
 import { toDo } from "../todo-items/todo";
 
 const project = (function() {
@@ -24,6 +24,7 @@ const project = (function() {
     document.getElementById('project-form').reset();
     showProjects(projectArray);
     assignProjectToDoSubmits();
+    assignProjectRemoveBtns();
   }
 
   function assignProjectToDoSubmits() {
@@ -46,6 +47,20 @@ const project = (function() {
       document.getElementById('project-todo-form'+`${projectIndex}`).reset();
       currentProject.toDos.push(newToDo);
       showProjects(projectArray);
+  }
+
+  function assignProjectRemoveBtns() {
+    const projectDiv = document.querySelectorAll('.project');
+    projectDiv.forEach(function(project) {
+      const removeBtn = document.getElementById('project-remove' + `${project.dataset.index}`);
+      removeBtn.addEventListener('click', (e) => removeProject(e, project.dataset.index));
+    })
+  }
+
+  function removeProject(e, projectIndex) {
+    projectArray[projectIndex] = '';
+    removeProjectDOM(projectIndex);
+    console.log(projectArray);
   }
 
   function printArray() {

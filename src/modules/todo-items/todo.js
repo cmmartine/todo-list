@@ -36,7 +36,6 @@ const toDo = (function() {
   function removeToDo(e, toDoIndex) {
     toDoArray[toDoIndex] = '';
     removeNonProjectToDo(toDoIndex);
-    console.log(toDoArray);
   }
 
   function printArray() {
