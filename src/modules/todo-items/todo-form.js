@@ -23,6 +23,7 @@ export { createToDoForm };
     submit.type = 'submit';
     submit.name = 'submit';
     submit.id = 'project-todo-submit' + `${projectIndex}`;
+    submit.classList.add('form-button');
     newForm.append(submit);
     projectContainer.append(newForm);
   }

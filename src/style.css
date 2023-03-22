@@ -3,6 +3,161 @@
   padding: 0px;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .toggle-visibility {
   display: none;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  position: sticky;
+  width: 100%;
+  margin: auto;
+  height: 56px;
+  top: 0px;
+  background-color: rgb(69, 70, 73);
+  color: white;
+}
+
+.nav-h3 {
+  padding-left: 25px;
+}
+
+.top-forms-container{
+  display: flex;
+  padding-top: 15px;
+}
+
+.form-div {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 20px;
+}
+
+.input-title {
+  margin-top: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-button {
+  width: 100px;
+  padding: 2px;
+  background-color: rgb(69, 70, 73);
+  color: white;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.form-button:hover {
+  background-color: rgba(69, 70, 73, 0.664);
+}
+
+.form-button:active {
+  background-color: rgba(83, 96, 134, 0.664);
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-self: center;
+  min-width: calc(100% - 50px);
+  min-height: calc(100vh - 112px);
+  padding: 0px 25px;
+  background-color: rgba(199, 193, 162, 0.281);
+}
+
+h2 {
+  margin: 15px 20px
+}
+
+.project-list, .todo-list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-self: center;
+  align-items: center;
+  width: 90%;
+  border-top: 2px solid rgba(199, 193, 162, 0.692);
+}
+
+.project, .todo-item {
+  display: grid;
+  grid-template-rows: repeat(auto-fit, minmax(0.2fr, 1fr));
+  grid-template-columns: 1fr 0.05fr;
+  border: 1px solid black;
+  padding: 20px;
+  margin: 15px 15px;
+  width: 80%;
+}
+
+.remove-button {
+  grid-row: 1;
+  grid-column: 2;
+  justify-self: end;
+  background-color: rgb(69, 70, 73);
+  color: white;
+  font-weight: bold;
+  width: 25px;
+  height: 25px;
+}
+
+.remove-button:hover {
+  background-color: rgb(255, 0, 0);
+}
+
+.remove-button:active {
+  background-color: rgba(182, 36, 31, 0.808);
+}
+
+.project-todo-div{
+  grid-row: 2;
+  margin: 5px 0px;
+  padding: 5px 0px;
+  border-top: 1px solid rgb(69, 70, 73);
+}
+
+.project-todo-item {
+  margin-top: 5px;
+  padding: 5px;
+  border-top: 1px dotted rgb(69, 70, 73);
+}
+
+.project-todo-form {
+  grid-row: 3;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  height: 56px;
+  background-color: rgb(69, 70, 73);
+  color: rgb(196, 196, 196);
+}
+
+.footer-p {
+  padding-left: 25px;
+}
+
+@media (max-width: 480px) {
+
+  .top-forms-container {
+    display: flex;
+    flex-direction: column;
+  }
 }

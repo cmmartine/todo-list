@@ -13,6 +13,7 @@ function showToDos(array) {
     toDoPara.dataset.index = item.index;
     toDoPara.innerText = `${item.title} \n ${item.description}`;
     removeBtn.innerText = "X";
+    removeBtn.classList.add('remove-button');
     toDoPara.append(removeBtn);
     toDoDiv.append(toDoPara);
   })
