@@ -34,8 +34,18 @@ const toDo = (function() {
   }
 
   function removeToDo(e, toDoIndex) {
-    toDoArray[toDoIndex] = '';
+    e.preventDefault();
     removeNonProjectToDo(toDoIndex);
+    toDoArray.splice(toDoIndex, 1);
+    reduceIndex(toDoArray);
+    showToDos(toDoArray);
+    assignRemoveBtns();
+  }
+
+  function reduceIndex(array) {
+    array.forEach(function(item) {
+      item.index -= 1;
+    })
   }
 
   function printArray() {

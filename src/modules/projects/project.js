@@ -1,5 +1,5 @@
 export { project };
-import { showProjects, removeProjectDOM } from "./project-dom";
+import { showProjects, removeProjectDOM, removeProjectToDoDOM } from "./project-dom";
 import { toDo } from "../todo-items/todo";
 
 const project = (function() {
@@ -25,13 +25,14 @@ const project = (function() {
     showProjects(projectArray);
     assignProjectToDoSubmits();
     assignProjectRemoveBtns();
+    assignProjectToDoRemoveBtns();
   }
 
   function assignProjectToDoSubmits() {
     const projectToDoForms = document.querySelectorAll('.project-todo-form');
     projectToDoForms.forEach(function(form) {
       let projectIndex = form.dataset.index;
-      const submitBtn = document.getElementById('project-todo-submit' + `${form.dataset.index}`);
+      const submitBtn = document.getElementById('project-todo-submit' + `${projectIndex}`);
       submitBtn.addEventListener('click', (e) => addProjectToDo(e, projectIndex));
     })
   }
@@ -47,6 +48,9 @@ const project = (function() {
       document.getElementById('project-todo-form'+`${projectIndex}`).reset();
       currentProject.toDos.push(newToDo);
       showProjects(projectArray);
+      assignProjectToDoSubmits();
+      assignProjectToDoRemoveBtns();
+      assignProjectRemoveBtns();
   }
 
   function assignProjectRemoveBtns() {
@@ -57,10 +61,41 @@ const project = (function() {
     })
   }
 
+  function assignProjectToDoRemoveBtns() {
+    projectArray.forEach(function(project) {
+      project.toDos.forEach(function(toDo) {
+        if (toDo != '') {
+          let toDoRemoveBtn = document.getElementById('project-todo-remove' + `${project.index}` + `${toDo.index}`);
+          toDoRemoveBtn.addEventListener('click', (e) => removeProjectToDo(e, project, toDo))
+        }
+      })
+    })
+  }
+
   function removeProject(e, projectIndex) {
-    projectArray[projectIndex] = '';
     removeProjectDOM(projectIndex);
-    console.log(projectArray);
+    projectArray.splice(projectIndex, 1);
+    reduceIndex(projectArray);
+    showProjects(projectArray);
+    assignProjectToDoSubmits();
+    assignProjectToDoRemoveBtns();
+    assignProjectRemoveBtns();
+  }
+
+  function removeProjectToDo(e, project, toDo) {
+    removeProjectToDoDOM(project.index, toDo.index);
+    project.toDos.splice(toDo.index, 1);
+    reduceIndex(project.toDos);
+    showProjects(projectArray);
+    assignProjectToDoSubmits();
+    assignProjectToDoRemoveBtns();
+    assignProjectRemoveBtns();
+  }
+
+  function reduceIndex(array) {
+    array.forEach(function(item) {
+      item.index -= 1;
+    })
   }
 
   function printArray() {
