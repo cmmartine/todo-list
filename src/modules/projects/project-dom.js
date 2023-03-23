@@ -8,32 +8,61 @@ function showProjects(array) {
   array.forEach(function(project) {
 
     const projectContainer = document.createElement('div');
-    const projectToDoDiv = document.createElement('div');
-    const projectRemoveBtn = document.createElement('button');
     projectContainer.dataset.index = project.index;
     projectContainer.id = 'project' + `${project.index}`;
     projectContainer.classList.add('project');
+
+    const projectToDoDiv = document.createElement('div');
     projectToDoDiv.classList.add('project-todo-div');
-    projectRemoveBtn.id = 'project-remove' +`${project.index}`;
-    projectContainer.innerText = `${project.title} \n ${project.description}`;
     projectToDoDiv.innerText = `To Dos:\n`;
+
+    const projectRemoveBtn = document.createElement('button');
+    projectRemoveBtn.id = 'project-remove' +`${project.index}`;
     projectRemoveBtn.innerText = 'X';
     projectRemoveBtn.classList.add('remove-button');
+
+    const projectContents = document.createElement('div');
+    projectContents.classList.add('project-content');
+
+    const projectTitle = document.createElement('p');
+    projectTitle.textContent = `Project Title: ${project.title}`;
+
+    const projectDesc = document.createElement('p');
+    projectDesc.textContent = `Description: ${project.description}`;
+
+    const projectDate = document.createElement('p');
+    projectDate.textContent = `Due Date: ${project.dueDate}`;
       
-    projectContainer.append(projectRemoveBtn);
+    projectContents.append(projectTitle, projectDesc, projectDate);
+    projectContainer.append(projectContents, projectRemoveBtn);
     projectContainer.append(projectToDoDiv);
     createToDoForm(projectContainer, project.index);
       
     project.toDos.forEach(function(toDo) {
-      const toDoPara = document.createElement('p');
+      const toDoDiv = document.createElement('div');
+      toDoDiv.id = 'project-todo-div' + `${project.index}` + `${toDo.index}`;
+      toDoDiv.classList.add('project-todo-item');
+
+      const toDoContents = document.createElement('div');
+      toDoContents.classList.add('todo-content');
+
+      const toDoTitle = document.createElement('p');
+      toDoTitle.textContent = `${toDo.title}`;
+
+      const toDoDesc = document.createElement('p');
+      toDoDesc.textContent = `${toDo.description}`;
+
+      const toDoDate = document.createElement('p');
+      toDoDate.textContent = `Due by: ${toDo.dueDate}`;
+
       const toDoRemoveBtn = document.createElement('button');
-      toDoPara.id = 'project-todo-para' + `${project.index}` + `${toDo.index}`;
-      toDoPara.classList.add('project-todo-item');
       toDoRemoveBtn.id = 'project-todo-remove' + `${project.index}` + `${toDo.index}`;
-      toDoPara.innerText = `${toDo.title} \n ${toDo.description}`;
       toDoRemoveBtn.innerText = 'X';
-      projectToDoDiv.append(toDoPara);
-      toDoPara.append(toDoRemoveBtn);
+
+      toDoContents.append(toDoTitle, toDoDesc, toDoDate);
+      toDoDiv.append(toDoContents);
+      projectToDoDiv.append(toDoDiv);
+      toDoDiv.append(toDoRemoveBtn);
     })
     allProjectsDiv.append(projectContainer);
   })
@@ -45,8 +74,8 @@ function removeProjectDOM(projectIndex) {
 }
 
 function removeProjectToDoDOM(projectIndex, toDoIndex) {
-  const toDoPara = document.getElementById('project-todo-para' + `${projectIndex}` + `${toDoIndex}`);
-  toDoPara.remove();
+  const toDoDiv = document.getElementById('project-todo-div' + `${projectIndex}` + `${toDoIndex}`);
+  toDoDiv.remove();
 }
 
 function resetProjects() {

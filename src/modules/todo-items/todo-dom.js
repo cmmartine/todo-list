@@ -1,29 +1,43 @@
 export { showToDos, removeNonProjectToDo }
 
-const toDoDiv = document.getElementById('todo-list');
+const toDoContainer = document.getElementById('todo-list');
 
 function showToDos(array) {
   resetToDos();
   array.forEach(function(item) {
-    const toDoPara = document.createElement('p');
+    const toDoDiv = document.createElement('div');
+    toDoDiv.id = 'todo-item' + `${item.index}`;
+    toDoDiv.classList.add('todo-item');
+    toDoDiv.dataset.index = item.index;
+
+    const toDoContents = document.createElement('div');
+    toDoContents.classList.add('todo-content');
+
+    const toDoTitle = document.createElement('p');
+    toDoTitle.textContent = `${item.title}`;
+
+    const toDoDesc = document.createElement('p');
+    toDoDesc.textContent = `Description: ${item.description}`;
+
+    const toDoDate = document.createElement('p');
+    toDoDate.textContent = `Due by: ${item.dueDate}`;
+
     const removeBtn = document.createElement('button');
-    toDoPara.id = 'todo-item' + `${item.index}`;
-    toDoPara.classList.add('todo-item');
     removeBtn.id = 'todo-remove' + `${item.index}`;
-    toDoPara.dataset.index = item.index;
-    toDoPara.innerText = `${item.title} \n ${item.description}`;
     removeBtn.innerText = "X";
     removeBtn.classList.add('remove-button');
-    toDoPara.append(removeBtn);
-    toDoDiv.append(toDoPara);
+
+    toDoContents.append(toDoTitle, toDoDesc, toDoDate);
+    toDoDiv.append(toDoContents, removeBtn);
+    toDoContainer.append(toDoDiv);
   })
 }
 
 function removeNonProjectToDo(toDoIndex) {
-  const toDoPara = document.getElementById('todo-item' + `${toDoIndex}`);
-  toDoPara.remove();
+  const toDoDiv = document.getElementById('todo-item' + `${toDoIndex}`);
+  toDoDiv.remove();
 }
 
 function resetToDos() {
-  toDoDiv.innerText = '';
+  toDoContainer.innerText = '';
 }

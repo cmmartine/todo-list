@@ -106,6 +106,12 @@ h2 {
   width: 80%;
 }
 
+.todo-content, .project-content {
+  word-wrap: break-word;
+  min-width: 200px;
+  max-width: 90%;
+}
+
 .remove-button {
   grid-row: 1;
   grid-column: 2;
@@ -127,6 +133,8 @@ h2 {
 
 .project-todo-div{
   grid-row: 2;
+  min-width: 200px;
+  max-width: 90%;
   margin: 5px 0px;
   padding: 5px 0px;
   border-top: 1px solid rgb(69, 70, 73);
@@ -140,6 +148,8 @@ h2 {
 
 .project-todo-form {
   grid-row: 3;
+  grid-column: 1;
+  width: 200px;
 }
 
 .footer {
