@@ -1,13 +1,14 @@
 export { createToDoForm };
 
 
-  const textFieldsArray = ['title', 'description', 'due-date'];
+  const textFieldsArray = ['title', 'description'];
 
   function createToDoForm(projectContainer, projectIndex) {
     const newForm = document.createElement('form');
     newForm.classList.add('project-todo-form');
     newForm.dataset.index = projectIndex;
     newForm.id = 'project-todo-form' + `${projectIndex}`;
+
     textFieldsArray.forEach(function(field) {
       const para = document.createElement('p');
       para.innerText = field[0].toUpperCase() + field.slice(1);
@@ -18,6 +19,13 @@ export { createToDoForm };
       newForm.append(para);
       newForm.append(info);
     })
+
+    const dueDate = document.createElement('input');
+    const datePara = document.createElement('p');
+    dueDate.id = 'project-todo-due-date' + `${projectIndex}`;
+    datePara.innerText = 'Due by: '
+    dueDate.type = 'datetime-local';
+    newForm.append(datePara, dueDate);
 
     const priorityLabel = document.createElement('label');
     priorityLabel.for = 'project-todo-priority';
@@ -34,7 +42,7 @@ export { createToDoForm };
       prioritySelect.append(priorityOption);
     })
 
-    newForm.append(priorityLabel, prioritySelect);
+    newForm.append(dueDate, priorityLabel, prioritySelect);
 
     const submit = document.createElement('input');
     submit.type = 'submit';
