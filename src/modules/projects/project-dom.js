@@ -26,6 +26,7 @@ function showProjects(array) {
 
     const projectTitle = document.createElement('p');
     projectTitle.textContent = `Project Title: ${project.title}`;
+    projectTitle.classList.add(`priority-${project.priority}`);
 
     const projectDesc = document.createElement('p');
     projectDesc.textContent = `Description: ${project.description}`;
@@ -52,6 +53,7 @@ function showProjects(array) {
 
       const toDoTitle = document.createElement('p');
       toDoTitle.textContent = `${toDo.title}`;
+      toDoTitle.classList.add(`priority-${toDo.priority}`);
 
       const toDoDesc = document.createElement('p');
       toDoDesc.textContent = `${toDo.description}`;

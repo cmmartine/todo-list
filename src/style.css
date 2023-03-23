@@ -79,7 +79,7 @@ form {
   min-width: calc(100% - 50px);
   min-height: calc(100vh - 112px);
   padding: 0px 25px;
-  background-color: rgba(199, 193, 162, 0.281);
+  background-color: rgba(199, 193, 162, 0.349);
 }
 
 h2 {
@@ -100,6 +100,7 @@ h2 {
   display: grid;
   grid-template-rows: repeat(auto-fit, minmax(0.2fr, 1fr));
   grid-template-columns: 1fr 0.05fr;
+  background-color: rgb(255, 255, 255);
   border: 1px solid black;
   padding: 20px;
   margin: 15px 15px;
@@ -150,6 +151,30 @@ h2 {
   grid-row: 3;
   grid-column: 1;
   width: 200px;
+}
+
+.priority-none {
+  font-weight: bold;
+}
+
+.priority-highest {
+  color: red;
+  font-weight: bold;
+}
+
+.priority-high {
+  color: orange;
+  font-weight: bold;
+}
+
+.priority-middle {
+  color: rgb(0, 173, 0);
+  font-weight: bold;
+}
+
+.priority-low {
+  color: blue;
+  font-weight: bold;
 }
 
 .footer {

@@ -15,6 +15,7 @@ function showToDos(array) {
 
     const toDoTitle = document.createElement('p');
     toDoTitle.textContent = `${item.title}`;
+    toDoTitle.classList.add(`priority-${item.priority}`);
 
     const toDoDesc = document.createElement('p');
     toDoDesc.textContent = `Description: ${item.description}`;

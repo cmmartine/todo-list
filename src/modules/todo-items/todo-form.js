@@ -23,7 +23,7 @@ export { createToDoForm };
     priorityLabel.for = 'project-todo-priority';
     priorityLabel.innerText = 'Priority';
 
-    const priorityTypes = ['none', 'highest', 'high', 'medium', 'low'];
+    const priorityTypes = ['none', 'highest', 'high', 'middle', 'low'];
     const prioritySelect = document.createElement('select');
     prioritySelect.id = 'project-todo-priority';
     prioritySelect.name = 'priorities';
