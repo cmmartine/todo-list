@@ -19,6 +19,23 @@ export { createToDoForm };
       newForm.append(info);
     })
 
+    const priorityLabel = document.createElement('label');
+    priorityLabel.for = 'project-todo-priority';
+    priorityLabel.innerText = 'Priority';
+
+    const priorityTypes = ['none', 'highest', 'high', 'medium', 'low'];
+    const prioritySelect = document.createElement('select');
+    prioritySelect.id = 'project-todo-priority';
+    prioritySelect.name = 'priorities';
+    priorityTypes.forEach(function(type) {
+      const priorityOption = document.createElement('option');
+      priorityOption.value = type;
+      priorityOption.text = type[0].toUpperCase() + type.slice(1);
+      prioritySelect.append(priorityOption);
+    })
+
+    newForm.append(priorityLabel, prioritySelect);
+
     const submit = document.createElement('input');
     submit.type = 'submit';
     submit.name = 'submit';

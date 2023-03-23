@@ -22,12 +22,16 @@ function showToDos(array) {
     const toDoDate = document.createElement('p');
     toDoDate.textContent = `Due by: ${item.dueDate}`;
 
+    const toDoPriority = document.createElement('p');
+    const priorityCapitalized = item.priority[0].toUpperCase() + item.priority.slice(1);
+    toDoPriority.textContent = `Priority: ${priorityCapitalized}`;
+
     const removeBtn = document.createElement('button');
     removeBtn.id = 'todo-remove' + `${item.index}`;
     removeBtn.innerText = "X";
     removeBtn.classList.add('remove-button');
 
-    toDoContents.append(toDoTitle, toDoDesc, toDoDate);
+    toDoContents.append(toDoTitle, toDoDesc, toDoDate, toDoPriority);
     toDoDiv.append(toDoContents, removeBtn);
     toDoContainer.append(toDoDiv);
   })

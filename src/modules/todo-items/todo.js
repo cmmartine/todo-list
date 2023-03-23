@@ -8,8 +8,8 @@ const toDo = (function() {
   const submitBtn = document.getElementById('todo-submit');
   submitBtn.addEventListener('click', buildAndAddToDo);
 
-  function toDoFactory (title, description, dueDate, index) {
-    return { title, description, dueDate, index }
+  function toDoFactory (title, description, dueDate, index, priority) {
+    return { title, description, dueDate, index, priority }
   }
 
   function buildAndAddToDo(e) {
@@ -18,7 +18,8 @@ const toDo = (function() {
     const descValue = document.getElementById('todo-description').value;
     const dueValue = document.getElementById('todo-due-date').value;
     const index = toDoArray.length;
-    const newToDo = toDoFactory(titleValue, descValue, dueValue, index);
+    const priority = document.getElementById('todo-priority').value;
+    const newToDo = toDoFactory(titleValue, descValue, dueValue, index, priority);
     toDoArray.push(newToDo);
     document.getElementById('todo-form').reset();
     showToDos(toDoArray);
@@ -37,14 +38,16 @@ const toDo = (function() {
     e.preventDefault();
     removeNonProjectToDo(toDoIndex);
     toDoArray.splice(toDoIndex, 1);
-    reduceIndex(toDoArray);
+    reduceIndex(toDoArray, toDoIndex);
     showToDos(toDoArray);
     assignRemoveBtns();
   }
 
-  function reduceIndex(array) {
+  function reduceIndex(array, removedItemIndex) {
     array.forEach(function(item) {
-      item.index -= 1;
+      if (item.index > removedItemIndex) {
+        item.index -= 1;
+      }
     })
   }
 

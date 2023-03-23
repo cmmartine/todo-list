@@ -9,8 +9,8 @@ const project = (function() {
   const submitBtn = document.getElementById('project-submit');
   submitBtn.addEventListener('click', buildAndAddProject);
 
-  function projectFactory (title, description, dueDate, index, toDos = []) {
-    return { title, description, dueDate, index, toDos }
+  function projectFactory (title, description, dueDate, index, priority, toDos = []) {
+    return { title, description, dueDate, index, priority, toDos }
   }
 
   function buildAndAddProject(e) {
@@ -19,8 +19,10 @@ const project = (function() {
     const descValue = document.getElementById('project-description').value;
     const dueValue = document.getElementById('project-due-date').value;
     const index = projectArray.length;
-    const newProject = projectFactory(titleValue, descValue, dueValue, index);
+    const priority = document.getElementById('project-priority').value;
+    const newProject = projectFactory(titleValue, descValue, dueValue, index, priority);
     projectArray.push(newProject);
+    
     document.getElementById('project-form').reset();
     showProjects(projectArray);
     assignProjectToDoSubmits();
@@ -44,7 +46,8 @@ const project = (function() {
       const descValue = document.getElementById('project-todo-description'+`${projectIndex}`).value;
       const dueValue = document.getElementById('project-todo-due-date'+`${projectIndex}`).value;
       const index = currentProject.toDos.length;
-      const newToDo = toDo.toDoFactory(titleValue, descValue, dueValue, index);
+      const priority = document.getElementById('project-todo-priority').value;
+      const newToDo = toDo.toDoFactory(titleValue, descValue, dueValue, index, priority);
       document.getElementById('project-todo-form'+`${projectIndex}`).reset();
       currentProject.toDos.push(newToDo);
       showProjects(projectArray);
@@ -75,7 +78,7 @@ const project = (function() {
   function removeProject(e, projectIndex) {
     removeProjectDOM(projectIndex);
     projectArray.splice(projectIndex, 1);
-    reduceIndex(projectArray);
+    reduceIndex(projectArray, projectIndex);
     showProjects(projectArray);
     assignProjectToDoSubmits();
     assignProjectToDoRemoveBtns();
@@ -85,16 +88,18 @@ const project = (function() {
   function removeProjectToDo(e, project, toDo) {
     removeProjectToDoDOM(project.index, toDo.index);
     project.toDos.splice(toDo.index, 1);
-    reduceIndex(project.toDos);
+    reduceIndex(project.toDos, toDo.index);
     showProjects(projectArray);
     assignProjectToDoSubmits();
     assignProjectToDoRemoveBtns();
     assignProjectRemoveBtns();
   }
 
-  function reduceIndex(array) {
+  function reduceIndex(array, removedItemIndex) {
     array.forEach(function(item) {
-      item.index -= 1;
+      if (item.index > removedItemIndex) {
+        item.index -= 1;
+      }
     })
   }
 

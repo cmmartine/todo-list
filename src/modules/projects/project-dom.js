@@ -32,8 +32,12 @@ function showProjects(array) {
 
     const projectDate = document.createElement('p');
     projectDate.textContent = `Due Date: ${project.dueDate}`;
+
+    const projectPriority = document.createElement('p');
+    const projectPriorityCapitalized = project.priority[0].toUpperCase() + project.priority.slice(1);
+    projectPriority.textContent = `Priority: ${projectPriorityCapitalized}`;
       
-    projectContents.append(projectTitle, projectDesc, projectDate);
+    projectContents.append(projectTitle, projectDesc, projectDate, projectPriority);
     projectContainer.append(projectContents, projectRemoveBtn);
     projectContainer.append(projectToDoDiv);
     createToDoForm(projectContainer, project.index);
@@ -55,11 +59,15 @@ function showProjects(array) {
       const toDoDate = document.createElement('p');
       toDoDate.textContent = `Due by: ${toDo.dueDate}`;
 
+      const toDoPriority = document.createElement('p');
+      const priorityCapitalized = toDo.priority[0].toUpperCase() + toDo.priority.slice(1);
+      toDoPriority.textContent = `Priority: ${priorityCapitalized}`;
+
       const toDoRemoveBtn = document.createElement('button');
       toDoRemoveBtn.id = 'project-todo-remove' + `${project.index}` + `${toDo.index}`;
       toDoRemoveBtn.innerText = 'X';
 
-      toDoContents.append(toDoTitle, toDoDesc, toDoDate);
+      toDoContents.append(toDoTitle, toDoDesc, toDoDate, toDoPriority);
       toDoDiv.append(toDoContents);
       projectToDoDiv.append(toDoDiv);
       toDoDiv.append(toDoRemoveBtn);
