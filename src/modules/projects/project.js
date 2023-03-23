@@ -17,7 +17,7 @@ const project = (function() {
     e.preventDefault();
     const titleValue = document.getElementById('project-title').value;
     const descValue = document.getElementById('project-description').value;
-    const dueValue = document.getElementById('project-due-date').value;
+    const dueValue = new Date(document.getElementById('project-due-date').value);
     const index = projectArray.length;
     const priority = document.getElementById('project-priority').value;
     const newProject = projectFactory(titleValue, descValue, dueValue, index, priority);
@@ -44,7 +44,7 @@ const project = (function() {
       const currentProject = projectArray[projectIndex];
       const titleValue = document.getElementById('project-todo-title'+`${projectIndex}`).value;
       const descValue = document.getElementById('project-todo-description'+`${projectIndex}`).value;
-      const dueValue = document.getElementById('project-todo-due-date'+`${projectIndex}`).value;
+      const dueValue = new Date(document.getElementById('project-todo-due-date'+`${projectIndex}`).value);
       const index = currentProject.toDos.length;
       const priority = document.getElementById('project-todo-priority').value;
       const newToDo = toDo.toDoFactory(titleValue, descValue, dueValue, index, priority);

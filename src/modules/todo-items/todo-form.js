@@ -5,27 +5,27 @@ export { createToDoForm };
 
   function createToDoForm(projectContainer, projectIndex) {
     const newForm = document.createElement('form');
-    newForm.classList.add('project-todo-form');
+    newForm.classList.add("project-todo-form", "toggle-visibility");
     newForm.dataset.index = projectIndex;
     newForm.id = 'project-todo-form' + `${projectIndex}`;
 
     textFieldsArray.forEach(function(field) {
-      const para = document.createElement('p');
-      para.innerText = field[0].toUpperCase() + field.slice(1);
+      const fieldLabel = document.createElement('div');
+      fieldLabel.innerText = field[0].toUpperCase() + field.slice(1);
       const info = document.createElement('input');
       info.type = 'text';
       info.id = 'project-todo' + '-' + `${field}` + `${projectIndex}`;
       info.name = `${field}`;
-      newForm.append(para);
+      newForm.append(fieldLabel);
       newForm.append(info);
     })
 
     const dueDate = document.createElement('input');
-    const datePara = document.createElement('p');
+    const dateLabel = document.createElement('div');
     dueDate.id = 'project-todo-due-date' + `${projectIndex}`;
-    datePara.innerText = 'Due by: '
+    dateLabel.innerText = 'Due by: '
     dueDate.type = 'datetime-local';
-    newForm.append(datePara, dueDate);
+    newForm.append(dateLabel, dueDate);
 
     const priorityLabel = document.createElement('label');
     priorityLabel.for = 'project-todo-priority';
@@ -51,4 +51,6 @@ export { createToDoForm };
     submit.classList.add('form-button');
     newForm.append(submit);
     projectContainer.append(newForm);
+
+    return newForm;
   }

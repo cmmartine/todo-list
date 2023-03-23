@@ -9,6 +9,10 @@ body {
   min-height: 100vh;
 }
 
+p {
+  margin-bottom: 8px;
+}
+
 .content-container {
   display: flex;
   flex-direction: column;
@@ -56,6 +60,7 @@ form {
 
 .form-button {
   width: 100px;
+  height: 25px;
   padding: 2px;
   background-color: rgb(69, 70, 73);
   color: white;

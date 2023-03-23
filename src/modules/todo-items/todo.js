@@ -16,7 +16,7 @@ const toDo = (function() {
     e.preventDefault();
     const titleValue = document.getElementById('todo-title').value;
     const descValue = document.getElementById('todo-description').value;
-    const dueValue = document.getElementById('todo-due-date').value;
+    const dueValue = new Date(document.getElementById('todo-due-date').value);
     const index = toDoArray.length;
     const priority = document.getElementById('todo-priority').value;
     const newToDo = toDoFactory(titleValue, descValue, dueValue, index, priority);

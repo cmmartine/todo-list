@@ -1,5 +1,6 @@
 export { showProjects, removeProjectDOM, removeProjectToDoDOM }
 import { createToDoForm } from "../todo-items/todo-form";
+import { formToggle } from "../form-toggle";
 
 const allProjectsDiv = document.getElementById('project-list');
 
@@ -25,14 +26,14 @@ function showProjects(array) {
     projectContents.classList.add('project-content');
 
     const projectTitle = document.createElement('p');
-    projectTitle.textContent = `Project Title: ${project.title}`;
+    projectTitle.textContent = `${project.title}`;
     projectTitle.classList.add(`priority-${project.priority}`);
 
     const projectDesc = document.createElement('p');
-    projectDesc.textContent = `Description: ${project.description}`;
+    projectDesc.textContent = `${project.description}\n`;
 
     const projectDate = document.createElement('p');
-    projectDate.textContent = `Due Date: ${project.dueDate}`;
+    projectDate.textContent = `Due by: ${project.dueDate}`;
 
     const projectPriority = document.createElement('p');
     const projectPriorityCapitalized = project.priority[0].toUpperCase() + project.priority.slice(1);
@@ -40,8 +41,24 @@ function showProjects(array) {
       
     projectContents.append(projectTitle, projectDesc, projectDate, projectPriority);
     projectContainer.append(projectContents, projectRemoveBtn);
-    projectContainer.append(projectToDoDiv);
-    createToDoForm(projectContainer, project.index);
+    const toDoForm = createToDoForm(projectContainer, project.index);
+    console.log(toDoForm);
+    projectContainer.append(projectToDoDiv, toDoForm);
+
+    const showButton = document.createElement('button');
+    showButton.id = 'project-todo-show' + `${project.index}`;
+    showButton.classList.add('form-button');
+    showButton.textContent = 'New To Do';
+
+    const hideButton = document.createElement('button');
+    hideButton.id = 'project-todo-hide' + `${project.index}`;
+    hideButton.classList.add('form-button', 'toggle-visibility');
+    hideButton.textContent = 'Hide Form';
+
+    projectContainer.append(showButton, hideButton);
+
+    showButton.addEventListener('click', (e) => formToggle.showForm(showButton, hideButton, toDoForm, e));
+    hideButton.addEventListener('click', (e) => formToggle.hideForm(showButton, hideButton, toDoForm, e));
       
     project.toDos.forEach(function(toDo) {
       const toDoDiv = document.createElement('div');

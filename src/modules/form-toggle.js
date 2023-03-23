@@ -2,8 +2,6 @@ export { formToggle };
 
 const formToggle = (function() {
 
-  (function formToggle() {
-
     const showToDoForm = document.getElementById('show-todo');
     const hideToDoForm = document.getElementById('hide-todo');
     const toDoForm = document.getElementById('todo-form')
@@ -26,5 +24,6 @@ const formToggle = (function() {
         showBtn.classList.remove('toggle-visibility');
         form.classList.add('toggle-visibility');
     }
-  })();
+
+    return { showForm, hideForm }
 })();
