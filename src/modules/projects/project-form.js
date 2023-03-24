@@ -1,39 +1,41 @@
-export { createToDoForm };
+export { createProjectForm };
 
-
-  const textFieldsArray = ['title', 'description'];
-
-  function createToDoForm(projectContainer, projectIndex) {
+  function createProjectForm(project, projectIndex) {
     const newForm = document.createElement('form');
-    newForm.classList.add("project-todo-form", "toggle-visibility");
+    newForm.classList.add("toggle-visibility");
     newForm.dataset.index = projectIndex;
-    newForm.id = 'project-todo-form' + `${projectIndex}`;
+    newForm.id = 'project-edit-form' + `${projectIndex}`;
 
-    textFieldsArray.forEach(function(field) {
-      const fieldLabel = document.createElement('div');
-      fieldLabel.innerText = field[0].toUpperCase() + field.slice(1);
-      const info = document.createElement('input');
-      info.type = 'text';
-      info.id = 'project-todo' + '-' + `${field}` + `${projectIndex}`;
-      info.name = `${field}`;
-      newForm.append(fieldLabel);
-      newForm.append(info);
-    })
+    const title = document.createElement('input');
+    const titleLabel = document.createElement('div');
+    title.id = 'project-title' + `${projectIndex}`;
+    titleLabel.innerText = 'Title: '
+    title.type = 'text';
+    title.value = project.title;
+    newForm.append(titleLabel, title);
+
+    const description = document.createElement('input');
+    const descLabel = document.createElement('div');
+    description.id = 'project-description' + `${projectIndex}`;
+    descLabel.innerText = 'Title: ';
+    description.type = 'text';
+    description.value = project.description;
+    newForm.append(descLabel, description);
 
     const dueDate = document.createElement('input');
     const dateLabel = document.createElement('div');
-    dueDate.id = 'project-todo-due-date' + `${projectIndex}`;
+    dueDate.id = 'project-due-date' + `${projectIndex}`;
     dateLabel.innerText = 'Due by: '
     dueDate.type = 'datetime-local';
     newForm.append(dateLabel, dueDate);
 
     const priorityLabel = document.createElement('label');
-    priorityLabel.for = 'project-todo-priority';
+    priorityLabel.for = 'project-priority';
     priorityLabel.innerText = 'Priority';
 
     const priorityTypes = ['none', 'highest', 'high', 'middle', 'low'];
     const prioritySelect = document.createElement('select');
-    prioritySelect.id = 'project-todo-priority';
+    prioritySelect.id = 'project-priority' + `${projectIndex}`;
     prioritySelect.name = 'priorities';
     priorityTypes.forEach(function(type) {
       const priorityOption = document.createElement('option');
@@ -41,13 +43,14 @@ export { createToDoForm };
       priorityOption.text = type[0].toUpperCase() + type.slice(1);
       prioritySelect.append(priorityOption);
     })
+    prioritySelect.value = project.priority;
 
     newForm.append(dueDate, priorityLabel, prioritySelect);
 
     const submit = document.createElement('input');
     submit.type = 'submit';
     submit.name = 'submit';
-    submit.id = 'project-todo-submit' + `${projectIndex}`;
+    submit.id = 'project-submit-edit' + `${projectIndex}`;
     submit.classList.add('form-button');
     newForm.append(submit);
 

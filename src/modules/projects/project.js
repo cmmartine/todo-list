@@ -30,6 +30,32 @@ const project = (function() {
     assignProjectToDoRemoveBtns();
   }
 
+  function removeProject(e, projectIndex) {
+    removeProjectDOM(projectIndex);
+    projectArray.splice(projectIndex, 1);
+    reduceIndex(projectArray, projectIndex);
+    showProjects(projectArray);
+    assignProjectToDoSubmits();
+    assignProjectToDoRemoveBtns();
+    assignProjectRemoveBtns();
+  }
+
+  function editProject(e, project) {
+    e.preventDefault();
+    const titleValue = document.getElementById('project-title' + `${project.index}`).value;
+    const descValue = document.getElementById('project-description' + `${project.index}`).value;
+    const dueValue = new Date(document.getElementById('project-due-date' + `${project.index}`).value);
+    const priority = document.getElementById('project-priority' + `${project.index}`).value;
+    project.title = titleValue;
+    project.description = descValue;
+    project.dueDate = dueValue;
+    project.priority = priority;
+    showProjects(projectArray);
+    assignProjectToDoSubmits();
+    assignProjectToDoRemoveBtns();
+    assignProjectRemoveBtns();
+  }
+
   function assignProjectToDoSubmits() {
     const projectToDoForms = document.querySelectorAll('.project-todo-form');
     projectToDoForms.forEach(function(form) {
@@ -37,6 +63,19 @@ const project = (function() {
       const submitBtn = document.getElementById('project-todo-submit' + `${projectIndex}`);
       submitBtn.addEventListener('click', (e) => addProjectToDo(e, projectIndex));
     })
+  }
+
+  function assignProjectRemoveBtns() {
+    const projectDiv = document.querySelectorAll('.project');
+    projectDiv.forEach(function(project) {
+      const removeBtn = document.getElementById('project-remove' + `${project.dataset.index}`);
+      removeBtn.addEventListener('click', (e) => removeProject(e, project.dataset.index));
+    })
+  }
+
+  function assignProjectEditBtns(project) {
+    const editBtn = document.getElementById('project-submit-edit' + `${project.index}`);
+    editBtn.addEventListener('click', (e) => editProject(e, project));
   }
 
   function addProjectToDo(e, projectIndex) {
@@ -56,14 +95,6 @@ const project = (function() {
       assignProjectRemoveBtns();
   }
 
-  function assignProjectRemoveBtns() {
-    const projectDiv = document.querySelectorAll('.project');
-    projectDiv.forEach(function(project) {
-      const removeBtn = document.getElementById('project-remove' + `${project.dataset.index}`);
-      removeBtn.addEventListener('click', (e) => removeProject(e, project.dataset.index));
-    })
-  }
-
   function assignProjectToDoRemoveBtns() {
     projectArray.forEach(function(project) {
       project.toDos.forEach(function(toDo) {
@@ -73,16 +104,6 @@ const project = (function() {
         }
       })
     })
-  }
-
-  function removeProject(e, projectIndex) {
-    removeProjectDOM(projectIndex);
-    projectArray.splice(projectIndex, 1);
-    reduceIndex(projectArray, projectIndex);
-    showProjects(projectArray);
-    assignProjectToDoSubmits();
-    assignProjectToDoRemoveBtns();
-    assignProjectRemoveBtns();
   }
 
   function removeProjectToDo(e, project, toDo) {
@@ -109,6 +130,6 @@ const project = (function() {
     });
   }
     
-  return { projectArray }
+  return { projectArray, assignProjectEditBtns }
     
 })();
