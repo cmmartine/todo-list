@@ -3,7 +3,7 @@ export { createToDoForm };
 
   const textFieldsArray = ['title', 'description'];
 
-  function createToDoForm(projectContainer, projectIndex) {
+  function createToDoForm(projectIndex) {
     const newForm = document.createElement('form');
     newForm.classList.add("project-todo-form", "toggle-visibility");
     newForm.dataset.index = projectIndex;

@@ -37,10 +37,6 @@ function showToDos(array) {
     removeBtn.innerText = "X";
     removeBtn.classList.add('remove-button');
 
-    toDoContents.append(toDoTitle, toDoDesc, toDoDate, toDoPriority, toDoEditForm);
-    toDoDiv.append(toDoContents, removeBtn);
-    toDoContainer.append(toDoDiv);
-
     const showEditButton = document.createElement('button');
     showEditButton.id = 'todo-edit-show' + `${item.index}`;
     showEditButton.textContent = 'Edit To Do';
@@ -51,11 +47,13 @@ function showToDos(array) {
     hideEditButton.textContent = 'Hide Form';
     hideEditButton.classList.add('form-button', 'toggle-visibility');
 
-    toDoContents.append(showEditButton, hideEditButton);
-
     showEditButton.addEventListener('click', (e) => formToggle.showForm(showEditButton, hideEditButton, toDoEditForm, e));
     showEditButton.addEventListener('click', (e) => toDoFile.assignToDoEditBtns(item));
     hideEditButton.addEventListener('click', (e) => formToggle.hideForm(showEditButton, hideEditButton, toDoEditForm, e));
+
+    toDoContents.append(toDoTitle, toDoDesc, toDoDate, toDoPriority, toDoEditForm);
+    toDoDiv.append(toDoContents, removeBtn, showEditButton, hideEditButton);
+    toDoContainer.append(toDoDiv);
   })
 }
 

@@ -130,6 +130,7 @@ h2 {
   font-weight: bold;
   width: 25px;
   height: 25px;
+  margin-top: 10px;
 }
 
 .remove-button:hover {
@@ -150,6 +151,9 @@ h2 {
 }
 
 .project-todo-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   margin-top: 5px;
   padding: 5px;
   border-top: 1px dotted rgb(69, 70, 73);
@@ -159,6 +163,12 @@ h2 {
   grid-row: 3;
   grid-column: 1;
   max-width: 200px;
+}
+
+.project-todo-button-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
 }
 
 .priority-none {
@@ -209,6 +219,12 @@ h2 {
     flex-direction: column;
     margin: 15px 0px;
     padding: 10px 12px;
+  }
+
+  .project-todo-item {
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
   }
   
 }

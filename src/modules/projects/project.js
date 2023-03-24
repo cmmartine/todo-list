@@ -95,6 +95,32 @@ const project = (function() {
       assignProjectRemoveBtns();
   }
 
+  function editProjectToDo(e, todo, project) {
+    e.preventDefault();
+    const titleValue = document.getElementById('project-todo-title' + `${project.index}` +  `${todo.index}`).value;
+    const descValue = document.getElementById('project-todo-description' + `${project.index}` +  `${todo.index}`).value;
+    const dueValue = new Date(document.getElementById('project-todo-due-date' + `${project.index}` +  `${todo.index}`).value);
+    const priority = document.getElementById('project-todo-priority' + `${project.index}` +  `${todo.index}`).value;
+    todo.title = titleValue;
+    todo.description = descValue;
+    todo.dueDate = dueValue;
+    todo.priority = priority;
+    showProjects(projectArray);
+    assignProjectToDoSubmits();
+    assignProjectToDoRemoveBtns();
+    assignProjectRemoveBtns();
+  }
+
+  function removeProjectToDo(e, project, toDo) {
+    removeProjectToDoDOM(project.index, toDo.index);
+    project.toDos.splice(toDo.index, 1);
+    reduceIndex(project.toDos, toDo.index);
+    showProjects(projectArray);
+    assignProjectToDoSubmits();
+    assignProjectToDoRemoveBtns();
+    assignProjectRemoveBtns();
+  }
+
   function assignProjectToDoRemoveBtns() {
     projectArray.forEach(function(project) {
       project.toDos.forEach(function(toDo) {
@@ -106,14 +132,9 @@ const project = (function() {
     })
   }
 
-  function removeProjectToDo(e, project, toDo) {
-    removeProjectToDoDOM(project.index, toDo.index);
-    project.toDos.splice(toDo.index, 1);
-    reduceIndex(project.toDos, toDo.index);
-    showProjects(projectArray);
-    assignProjectToDoSubmits();
-    assignProjectToDoRemoveBtns();
-    assignProjectRemoveBtns();
+  function assignProjectToDoEditBtns(toDo, project) {
+    const editBtn = document.getElementById('project-todo-submit-edit' + `${project.index}` + `${toDo.index}`);
+    editBtn.addEventListener('click', (e) => editProjectToDo(e, toDo, project));
   }
 
   function reduceIndex(array, removedItemIndex) {
@@ -130,6 +151,6 @@ const project = (function() {
     });
   }
     
-  return { projectArray, assignProjectEditBtns }
+  return { projectArray, assignProjectEditBtns, assignProjectToDoEditBtns }
     
 })();
