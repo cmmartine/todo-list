@@ -6,18 +6,16 @@ export { editToDoForm };
     newForm.dataset.index = todoIndex;
     newForm.id = 'todo-edit-form' + `${todoIndex}`;
 
-    const title = document.createElement('input');
+    const title = document.createElement('textarea');
     const titleLabel = document.createElement('div');
     title.id = 'todo-title' + `${todoIndex}`;
     titleLabel.innerText = 'Title: ';
-    title.type = 'text';
     title.value = toDo.title;
 
-    const description = document.createElement('input');
+    const description = document.createElement('textarea');
     const descLabel = document.createElement('div');
     description.id = 'todo-description' + `${todoIndex}`;
     descLabel.innerText = 'Description: ';
-    description.type = 'text';
     description.value = toDo.description;
 
     const dueDate = document.createElement('input');

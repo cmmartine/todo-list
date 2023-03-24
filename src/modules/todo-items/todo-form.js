@@ -12,8 +12,7 @@ export { createToDoForm };
     textFieldsArray.forEach(function(field) {
       const fieldLabel = document.createElement('div');
       fieldLabel.innerText = field[0].toUpperCase() + field.slice(1);
-      const info = document.createElement('input');
-      info.type = 'text';
+      const info = document.createElement('textarea');
       info.id = 'project-todo' + '-' + `${field}` + `${projectIndex}`;
       info.name = `${field}`;
       newForm.append(fieldLabel);

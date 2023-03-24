@@ -6,19 +6,17 @@ export { createProjectForm };
     newForm.dataset.index = projectIndex;
     newForm.id = 'project-edit-form' + `${projectIndex}`;
 
-    const title = document.createElement('input');
+    const title = document.createElement('textarea');
     const titleLabel = document.createElement('div');
     title.id = 'project-title' + `${projectIndex}`;
     titleLabel.innerText = 'Title: '
-    title.type = 'text';
     title.value = project.title;
     newForm.append(titleLabel, title);
 
-    const description = document.createElement('input');
+    const description = document.createElement('textarea');
     const descLabel = document.createElement('div');
     description.id = 'project-description' + `${projectIndex}`;
     descLabel.innerText = 'Title: ';
-    description.type = 'text';
     description.value = project.description;
     newForm.append(descLabel, description);
 
