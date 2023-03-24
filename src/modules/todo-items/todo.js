@@ -26,6 +26,29 @@ const toDo = (function() {
     assignRemoveBtns();
   }
 
+  function removeToDo(e, toDoIndex) {
+    e.preventDefault();
+    removeNonProjectToDo(toDoIndex);
+    toDoArray.splice(toDoIndex, 1);
+    reduceIndex(toDoArray, toDoIndex);
+    showToDos(toDoArray);
+    assignRemoveBtns();
+  }
+
+  function editToDo(e, todo) {
+    e.preventDefault();
+    const titleValue = document.getElementById('todo-title' + `${todo.index}`).value;
+    const descValue = document.getElementById('todo-description' + `${todo.index}`).value;
+    const dueValue = new Date(document.getElementById('todo-due-date' + `${todo.index}`).value);
+    const priority = document.getElementById('todo-priority' + `${todo.index}`).value;
+    todo.title = titleValue;
+    todo.description = descValue;
+    todo.dueDate = dueValue;
+    todo.priority = priority;
+    showToDos(toDoArray);
+    assignRemoveBtns();
+  }
+
   function assignRemoveBtns() {
     const toDoParas = document.querySelectorAll('.todo-item');
     toDoParas.forEach(function(toDo) {
@@ -34,13 +57,9 @@ const toDo = (function() {
     })
   }
 
-  function removeToDo(e, toDoIndex) {
-    e.preventDefault();
-    removeNonProjectToDo(toDoIndex);
-    toDoArray.splice(toDoIndex, 1);
-    reduceIndex(toDoArray, toDoIndex);
-    showToDos(toDoArray);
-    assignRemoveBtns();
+  function assignToDoEditBtns(todo) {
+    const editBtn = document.getElementById('todo-submit-edit' + `${todo.index}`);
+    editBtn.addEventListener('click', (e) => editToDo(e, todo));
   }
 
   function reduceIndex(array, removedItemIndex) {
@@ -57,6 +76,6 @@ const toDo = (function() {
     });
   }
     
-  return { toDoArray, toDoFactory }
+  return { toDoArray, toDoFactory, assignToDoEditBtns }
     
 })();

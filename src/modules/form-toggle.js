@@ -12,7 +12,7 @@ const formToggle = (function() {
     hideToDoForm.addEventListener('click', (e) => hideForm(showToDoForm, hideToDoForm, toDoForm, e));
     showProjectForm.addEventListener('click', (e) => showForm(showProjectForm, hideProjectForm, ProjectForm, e));
     hideProjectForm.addEventListener('click', (e) => hideForm(showProjectForm, hideProjectForm, ProjectForm, e));
-    //The show and hide buttons for project todos are located in the project-dom file
+    //The show and hide buttons for project todos, and edits for both projects and todos are located in their respective dom file
 
     function showForm(showBtn, hideBtn, form) {
         showBtn.classList.add('toggle-visibility');
