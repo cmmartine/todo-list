@@ -1,12 +1,26 @@
 export { toDo };
 import { removeNonProjectToDo, showToDos } from "./todo-dom";
+import { saveToDosToStorage, retrieveSavedToDos } from "../local-storage";
 
 const toDo = (function() {
 
-  const toDoArray = [];
+  let toDoArray = [];
 
   const submitBtn = document.getElementById('todo-submit');
   submitBtn.addEventListener('click', buildAndAddToDo);
+
+  function toDoStorageLoad() {
+    const savedToDoObject = retrieveSavedToDos();
+    if(savedToDoObject) {
+      savedToDoObject.forEach(function(savedToDo) {
+        const buildToDo = toDoFactory(savedToDo.title, savedToDo.description, savedToDo.dueDate, savedToDo.index, savedToDo.priority);
+        toDoArray.push(buildToDo);
+      });
+      showToDos(toDoArray);
+      assignRemoveBtns();
+      saveToDosToStorage(toDoArray);
+    }
+  }
 
   function toDoFactory (title, description, dueDate, index, priority) {
     return { title, description, dueDate, index, priority }
@@ -24,6 +38,7 @@ const toDo = (function() {
     document.getElementById('todo-form').reset();
     showToDos(toDoArray);
     assignRemoveBtns();
+    saveToDosToStorage(toDoArray);
   }
 
   function removeToDo(e, toDoIndex) {
@@ -33,6 +48,7 @@ const toDo = (function() {
     reduceIndex(toDoArray, toDoIndex);
     showToDos(toDoArray);
     assignRemoveBtns();
+    saveToDosToStorage(toDoArray);
   }
 
   function editToDo(e, todo) {
@@ -47,6 +63,7 @@ const toDo = (function() {
     todo.priority = priority;
     showToDos(toDoArray);
     assignRemoveBtns();
+    saveToDosToStorage(toDoArray);
   }
 
   function assignRemoveBtns() {
@@ -76,6 +93,6 @@ const toDo = (function() {
     });
   }
     
-  return { toDoArray, toDoFactory, assignToDoEditBtns }
+  return { toDoArray, toDoFactory, assignToDoEditBtns, toDoStorageLoad }
     
 })();

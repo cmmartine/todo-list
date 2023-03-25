@@ -1,13 +1,29 @@
 export { project };
 import { showProjects, removeProjectDOM, removeProjectToDoDOM } from "./project-dom";
 import { toDo } from "../todo-items/todo";
+import { saveProjectsToStorage, retrieveSavedProjects } from "../local-storage";
 
 const project = (function() {
 
-  const projectArray = [];
+  let projectArray = [];
 
   const submitBtn = document.getElementById('project-submit');
   submitBtn.addEventListener('click', buildAndAddProject);
+
+  function projectStorageLoad() {
+    const savedProjectObject = retrieveSavedProjects();
+    if(savedProjectObject) {
+      savedProjectObject.forEach(function(savedProject) {
+        const buildProject = projectFactory(savedProject.title, savedProject.description, savedProject.dueDate, savedProject.index, savedProject.priority, savedProject.toDos);
+        projectArray.push(buildProject);
+      });
+      showProjects(projectArray);
+      assignProjectToDoSubmits();
+      assignProjectRemoveBtns();
+      assignProjectToDoRemoveBtns();
+      saveProjectsToStorage(projectArray);
+    }
+  }
 
   function projectFactory (title, description, dueDate, index, priority, toDos = []) {
     return { title, description, dueDate, index, priority, toDos }
@@ -28,6 +44,7 @@ const project = (function() {
     assignProjectToDoSubmits();
     assignProjectRemoveBtns();
     assignProjectToDoRemoveBtns();
+    saveProjectsToStorage(projectArray);
   }
 
   function removeProject(e, projectIndex) {
@@ -38,6 +55,7 @@ const project = (function() {
     assignProjectToDoSubmits();
     assignProjectToDoRemoveBtns();
     assignProjectRemoveBtns();
+    saveProjectsToStorage(projectArray);
   }
 
   function editProject(e, project) {
@@ -54,6 +72,7 @@ const project = (function() {
     assignProjectToDoSubmits();
     assignProjectToDoRemoveBtns();
     assignProjectRemoveBtns();
+    saveProjectsToStorage(projectArray);
   }
 
   function assignProjectToDoSubmits() {
@@ -93,6 +112,7 @@ const project = (function() {
       assignProjectToDoSubmits();
       assignProjectToDoRemoveBtns();
       assignProjectRemoveBtns();
+      saveProjectsToStorage(projectArray);
   }
 
   function editProjectToDo(e, todo, project) {
@@ -109,6 +129,7 @@ const project = (function() {
     assignProjectToDoSubmits();
     assignProjectToDoRemoveBtns();
     assignProjectRemoveBtns();
+    saveProjectsToStorage(projectArray);
   }
 
   function removeProjectToDo(e, project, toDo) {
@@ -119,6 +140,7 @@ const project = (function() {
     assignProjectToDoSubmits();
     assignProjectToDoRemoveBtns();
     assignProjectRemoveBtns();
+    saveProjectsToStorage(projectArray);
   }
 
   function assignProjectToDoRemoveBtns() {
@@ -151,6 +173,6 @@ const project = (function() {
     });
   }
     
-  return { projectArray, assignProjectEditBtns, assignProjectToDoEditBtns }
+  return { projectArray, assignProjectEditBtns, assignProjectToDoEditBtns, projectStorageLoad }
     
 })();
