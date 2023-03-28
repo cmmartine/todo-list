@@ -36,7 +36,8 @@ function showProjects(array) {
     projectDesc.textContent = `${project.description}\n`;
 
     const projectDate = document.createElement('p');
-    projectDate.textContent = `Due by: ${project.dueDate}`;
+    const date = project.dueDate;
+    projectDate.textContent = `Due by: ${date}`;
 
     const projectPriority = document.createElement('p');
     const projectPriorityCapitalized = project.priority[0].toUpperCase() + project.priority.slice(1);

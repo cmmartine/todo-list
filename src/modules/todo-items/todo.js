@@ -13,8 +13,7 @@ const toDo = (function() {
     const savedToDoObject = retrieveSavedToDos();
     if(savedToDoObject) {
       savedToDoObject.forEach(function(savedToDo) {
-        const buildToDo = toDoFactory(savedToDo.title, savedToDo.description, savedToDo.dueDate, savedToDo.index, savedToDo.priority);
-        toDoArray.push(buildToDo);
+        toDoArray.push(savedToDo);
       });
       showToDos(toDoArray);
       assignRemoveBtns();
@@ -30,7 +29,8 @@ const toDo = (function() {
     e.preventDefault();
     const titleValue = document.getElementById('todo-title').value;
     const descValue = document.getElementById('todo-description').value;
-    const dueValue = new Date(document.getElementById('todo-due-date').value);
+    const dateOptions = { dateStyle: "full", timeStyle: "short"};
+    const dueValue = new Date(document.getElementById('todo-due-date').value).toLocaleString("en-US", dateOptions);
     const index = toDoArray.length;
     const priority = document.getElementById('todo-priority').value;
     const newToDo = toDoFactory(titleValue, descValue, dueValue, index, priority);
@@ -85,12 +85,6 @@ const toDo = (function() {
         item.index -= 1;
       }
     })
-  }
-
-  function printArray() {
-    toDoArray.forEach(function (item) {
-      console.log(item);
-    });
   }
     
   return { toDoArray, toDoFactory, assignToDoEditBtns, toDoStorageLoad }

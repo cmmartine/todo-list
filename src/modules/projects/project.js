@@ -14,8 +14,8 @@ const project = (function() {
     const savedProjectObject = retrieveSavedProjects();
     if(savedProjectObject) {
       savedProjectObject.forEach(function(savedProject) {
-        const buildProject = projectFactory(savedProject.title, savedProject.description, savedProject.dueDate, savedProject.index, savedProject.priority, savedProject.toDos);
-        projectArray.push(buildProject);
+        console.log(savedProject);
+        projectArray.push(savedProject);
       });
       showProjects(projectArray);
       assignProjectToDoSubmits();
@@ -33,7 +33,8 @@ const project = (function() {
     e.preventDefault();
     const titleValue = document.getElementById('project-title').value;
     const descValue = document.getElementById('project-description').value;
-    const dueValue = new Date(document.getElementById('project-due-date').value);
+    const dateOptions = { dateStyle: "full", timeStyle: "short"};
+    const dueValue = new Date(document.getElementById('project-due-date').value).toLocaleString("en-US", dateOptions);
     const index = projectArray.length;
     const priority = document.getElementById('project-priority').value;
     const newProject = projectFactory(titleValue, descValue, dueValue, index, priority);
@@ -102,7 +103,8 @@ const project = (function() {
       const currentProject = projectArray[projectIndex];
       const titleValue = document.getElementById('project-todo-title'+`${projectIndex}`).value;
       const descValue = document.getElementById('project-todo-description'+`${projectIndex}`).value;
-      const dueValue = new Date(document.getElementById('project-todo-due-date'+`${projectIndex}`).value);
+      const dateOptions = { dateStyle: "full", timeStyle: "short"};
+      const dueValue = new Date(document.getElementById('project-todo-due-date'+`${projectIndex}`).value).toLocaleString("en-US", dateOptions);
       const index = currentProject.toDos.length;
       const priority = document.getElementById('project-todo-priority').value;
       const newToDo = toDo.toDoFactory(titleValue, descValue, dueValue, index, priority);
@@ -165,12 +167,6 @@ const project = (function() {
         item.index -= 1;
       }
     })
-  }
-
-  function printArray() {
-    projectArray.forEach(function (item) {
-      console.log(item);
-    });
   }
     
   return { projectArray, assignProjectEditBtns, assignProjectToDoEditBtns, projectStorageLoad }
