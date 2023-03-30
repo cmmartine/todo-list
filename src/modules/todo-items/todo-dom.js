@@ -2,6 +2,7 @@ export { showToDos, removeNonProjectToDo }
 import { toDo as toDoFile } from "./todo";
 import { editToDoForm } from "./todo-edit-form";
 import { formToggle } from "../form-toggle";
+import { strikeThrough } from "../strike-through";
 
 const toDoContainer = document.getElementById('todo-list');
 
@@ -30,6 +31,12 @@ function showToDos(array) {
     const priorityCapitalized = item.priority[0].toUpperCase() + item.priority.slice(1);
     toDoPriority.textContent = `Priority: ${priorityCapitalized}`;
 
+    const toDoCheckBox = document.createElement('input');
+    toDoCheckBox.classList.add('check-mark');
+    toDoCheckBox.setAttribute('type', 'checkbox');
+
+    toDoCheckBox.addEventListener('click', (e) => strikeThrough([toDoTitle, toDoDesc, toDoDate, toDoPriority]))
+
     const toDoEditForm = editToDoForm(item, item.index);
 
     const removeBtn = document.createElement('button');
@@ -51,7 +58,7 @@ function showToDos(array) {
     showEditButton.addEventListener('click', (e) => toDoFile.assignToDoEditBtns(item));
     hideEditButton.addEventListener('click', (e) => formToggle.hideForm(showEditButton, hideEditButton, toDoEditForm, e));
 
-    toDoContents.append(toDoTitle, toDoDesc, toDoDate, toDoPriority, toDoEditForm);
+    toDoContents.append(toDoTitle, toDoDesc, toDoDate, toDoPriority, toDoCheckBox, toDoEditForm);
     toDoDiv.append(toDoContents, removeBtn, showEditButton, hideEditButton);
     toDoContainer.append(toDoDiv);
   })

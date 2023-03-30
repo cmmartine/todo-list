@@ -4,6 +4,7 @@ import { createProjectForm } from "./project-edit-form";
 import { editProjectToDoForm } from "./project-todo-edit-form";
 import { formToggle } from "../form-toggle";
 import { project as projectFile} from "./project";
+import { strikeThrough } from "../strike-through";
 
 const allProjectsDiv = document.getElementById('project-list');
 
@@ -43,13 +44,13 @@ function showProjects(array) {
     const projectPriorityCapitalized = project.priority[0].toUpperCase() + project.priority.slice(1);
     projectPriority.textContent = `Priority: ${projectPriorityCapitalized}`;
 
-    const projectEditForm = createProjectForm(project, project.index);
-      
-    projectContents.append(projectTitle, projectDesc, projectDate, projectPriority, projectEditForm);
-    projectContainer.append(projectContents, projectRemoveBtn);
+    const projectCheckBox = document.createElement('input');
+    projectCheckBox.classList.add('check-mark');
+    projectCheckBox.setAttribute('type', 'checkbox');
 
-    const toDoForm = createToDoForm(project.index);
-    projectContainer.append(projectToDoDiv, toDoForm);
+    projectCheckBox.addEventListener('click', (e) => strikeThrough([projectTitle, projectDesc, projectDate, projectPriority]))
+
+    const projectEditForm = createProjectForm(project, project.index);
 
     const showProjectEditButton = document.createElement('button');
     showProjectEditButton.id = 'project-edit-show' + `${project.index}`;
@@ -60,8 +61,12 @@ function showProjects(array) {
     hideProjectEditButton.id = 'project-edit-hide' + `${project.index}`;
     hideProjectEditButton.textContent = 'Hide Form';
     hideProjectEditButton.classList.add('form-button', 'toggle-visibility');
+      
+    projectContents.append(projectTitle, projectDesc, projectDate, projectPriority, projectCheckBox, projectEditForm);
+    projectContainer.append(projectContents, projectRemoveBtn, showProjectEditButton, hideProjectEditButton);
 
-    projectContainer.append(showProjectEditButton, hideProjectEditButton);
+    const toDoForm = createToDoForm(project.index);
+    projectContainer.append(projectToDoDiv, toDoForm);
 
     const showProjectToDoButton = document.createElement('button');
     showProjectToDoButton.id = 'project-todo-show' + `${project.index}`;
@@ -106,6 +111,12 @@ function showProjects(array) {
       const priorityCapitalized = toDo.priority[0].toUpperCase() + toDo.priority.slice(1);
       toDoPriority.textContent = `Priority: ${priorityCapitalized}`;
 
+      const projectToDoCheckBox = document.createElement('input');
+      projectToDoCheckBox.classList.add('check-mark');
+      projectToDoCheckBox.setAttribute('type', 'checkbox');
+
+      projectToDoCheckBox.addEventListener('click', (e) => strikeThrough([toDoTitle, toDoDesc, toDoDate, toDoPriority]))
+
       const toDoRemoveBtn = document.createElement('button');
       toDoRemoveBtn.id = 'project-todo-remove' + `${project.index}` + `${toDo.index}`;
       toDoRemoveBtn.classList.add('remove-button');
@@ -127,7 +138,7 @@ function showProjects(array) {
       showProjectToDoEditButton.addEventListener('click', (e) => projectFile.assignProjectToDoEditBtns(toDo, project));
       hideProjectToDoEditButton.addEventListener('click', (e) => formToggle.hideForm(showProjectToDoEditButton, hideProjectToDoEditButton, projectToDoEditForm, e));
 
-      toDoContents.append(toDoTitle, toDoDesc, toDoDate, toDoPriority, projectToDoEditForm);
+      toDoContents.append(toDoTitle, toDoDesc, toDoDate, toDoPriority, projectToDoCheckBox, projectToDoEditForm);
       projectToDoBtnContainer.append(toDoRemoveBtn, showProjectToDoEditButton, hideProjectToDoEditButton)
       toDoDiv.append(toDoContents, projectToDoBtnContainer);
       projectToDoDiv.append(toDoDiv);
